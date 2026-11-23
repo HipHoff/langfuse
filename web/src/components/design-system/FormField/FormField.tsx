@@ -12,6 +12,7 @@ import {
 } from "react-hook-form";
 
 import { type CustomTooltip } from "@/src/components/design-system/CustomTooltip/CustomTooltip";
+import { FormError } from "@/src/components/design-system/FormError/FormError";
 import { assertUnreachable } from "@/src/utils/types";
 
 type FormFieldDescription =
@@ -162,9 +163,7 @@ function FormFieldLayout({
       <div className="space-y-1">
         {children}
         {errorMessage ? (
-          <p id={errorId} className="text-destructive text-sm">
-            {errorMessage}
-          </p>
+          <FormError id={errorId}>{errorMessage}</FormError>
         ) : null}
       </div>
       {description ? (

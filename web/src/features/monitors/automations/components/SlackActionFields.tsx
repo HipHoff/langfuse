@@ -51,11 +51,7 @@ function SlackConnectField({
           onClick={slack.onConnect}
         />
       </div>
-      {slack.connectError && (
-        <p role="alert" className="text-destructive text-sm">
-          {slack.connectError}
-        </p>
-      )}
+      <Form.Error announce>{slack.connectError}</Form.Error>
     </FieldGroup>
   );
 }
@@ -140,24 +136,22 @@ function TestChannelStatus({
 }: {
   result: SlackTestMessageResult | undefined;
 }) {
-  if (result?.status === "failed") {
-    return (
-      <p role="alert" className="text-destructive text-sm">
-        {result.message}
-      </p>
-    );
-  }
-  if (result?.status === "sent") {
-    return (
-      <p role="status" className="text-muted-foreground text-sm">
-        Test message sent. Check the channel in Slack.
-      </p>
-    );
-  }
   return (
-    <p className="text-muted-foreground text-sm">
-      Test this channel to verify the bot can send messages.
-    </p>
+    <>
+      <Form.Error announce>
+        {result?.status === "failed" ? result.message : undefined}
+      </Form.Error>
+      {result?.status !== "failed" && (
+        <p
+          role={result?.status === "sent" ? "status" : undefined}
+          className="text-muted-foreground text-sm"
+        >
+          {result?.status === "sent"
+            ? "Test message sent. Check the channel in Slack."
+            : "Test this channel to verify the bot can send messages."}
+        </p>
+      )}
+    </>
   );
 }
 

@@ -53,11 +53,11 @@ export function WebhookSecretDialog({
                   }
                 />
               </div>
-              {copyStatus === "failed" && (
-                <p role="alert" className="text-destructive text-sm">
-                  Copy failed. Select the secret and copy it manually.
-                </p>
-              )}
+              <Form.Error announce>
+                {copyStatus === "failed"
+                  ? "Copy failed. Select the secret and copy it manually."
+                  : undefined}
+              </Form.Error>
             </div>
           )}
         </Form.Field>

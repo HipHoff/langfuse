@@ -153,9 +153,7 @@ function CustomHeaderRow({
           <IconButton icon={X} label="Remove header" onClick={onRemove} />
         </div>
       </div>
-      {errorMessage && (
-        <p className="text-destructive text-sm">{errorMessage}</p>
-      )}
+      {errorMessage && <Form.Error>{errorMessage}</Form.Error>}
     </div>
   );
 }
