@@ -12,6 +12,7 @@ import {
 
 import { Button } from "@/src/components/design-system/Button/Button";
 import { FormError } from "@/src/components/design-system/FormError/FormError";
+import { FormFieldset } from "@/src/components/design-system/FormFieldset/FormFieldset";
 import {
   FormField,
   type FormFieldProps,
@@ -279,6 +280,7 @@ function FormRoot({
 
 export const Form = Object.assign(FormRoot, {
   Error: FormError,
+  Fieldset: FormFieldset,
   Field: FormField,
   InputField: FormInputField,
   PasswordInputField: FormPasswordInputField,

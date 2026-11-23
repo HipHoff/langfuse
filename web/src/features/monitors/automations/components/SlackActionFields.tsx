@@ -11,7 +11,6 @@ import {
 import { type SlackTestMessageResult } from "@/src/features/slack/hooks/useSlackTestMessage";
 import { type SlackChannel } from "@/src/features/slack/components/ChannelSelector";
 import { type MonitorAutomationFormValues } from "../helpers/monitorAutomationFormSchema";
-import { FieldGroup } from "./FieldGroup";
 
 /** SlackActionFields picks the channel of a connected workspace, or offers to connect one. */
 export function SlackActionFields({
@@ -34,25 +33,27 @@ function SlackConnectField({
   slack: Extract<SlackFieldsState, { status: "disconnected" }>;
 }) {
   return (
-    <FieldGroup label="Slack channel">
-      <p className="text-muted-foreground text-sm">
-        Connect your Slack workspace to enable real-time notifications for your
-        automations.
-        {!slack.canManageIntegration &&
-          " Ask a project admin to connect Slack."}
-      </p>
-      <div className="flex">
-        <Button
-          type="button"
-          variant="primary"
-          icon={SiSlack}
-          text={connectLabel(slack.isConnecting)}
-          disabled={!slack.canConnect || slack.isConnecting}
-          onClick={slack.onConnect}
-        />
+    <Form.Fieldset label="Slack channel">
+      <div className="flex flex-col gap-2">
+        <p className="text-muted-foreground text-sm">
+          Connect your Slack workspace to enable real-time notifications for
+          your automations.
+          {!slack.canManageIntegration &&
+            " Ask a project admin to connect Slack."}
+        </p>
+        <div className="flex">
+          <Button
+            type="button"
+            variant="primary"
+            icon={SiSlack}
+            text={connectLabel(slack.isConnecting)}
+            disabled={!slack.canConnect || slack.isConnecting}
+            onClick={slack.onConnect}
+          />
+        </div>
+        <Form.Error announce>{slack.connectError}</Form.Error>
       </div>
-      <Form.Error announce>{slack.connectError}</Form.Error>
-    </FieldGroup>
+    </Form.Fieldset>
   );
 }
 
